@@ -10,8 +10,8 @@
     </title> 
 </head>
 
-    <body>
-    <h1 id="date" style="text-align: center; font-size: 48px;color:black;margin-top: 150px;">
+    <body style="background-color: black;color:white;">
+    <h1 id="date" style="text-align: center; font-size: 48px;margin-top: 150px;">
 
     </h1>
     <p align="center"> 
@@ -33,32 +33,45 @@
  <script>
     // Get the canvas that Processing-js will use
    let canvas = document.getElementById("mycanvas"); 
-   let seconds = 1;
+   let seconds = 3;
    const christmasCards = [mario, chauncey];
    let currentCard = 1; //start with the second card, card 0 is displayed right away
 
    //start the first card (really card number 0)
     let processingInstance = new Processing(canvas, christmasCards[0]); 
-    let date = new Date();
-    let time = date.toString().slice(0,21);
-
-    
+    // let date = new Date();
+    // let time = date.toString().slice(0,21);
+    let time;
    
+    function updateTime() {
+        var date = new Date();
+        var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+        var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+        hours = hours < 10 ? "0" + hours : hours;
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        time = hours + ":" + minutes + ":" + seconds + " " + am_pm;
+    };
 
-   //every 5 seconds
+    //updat time right away
+    updateTime();
+    document.getElementById("date").innerHTML = time
+    
+      //every certain amount of seconds update christmas card
    let one = false;
    const interval = setInterval(function () {
     let processingInstance = new Processing(canvas, christmasCards[currentCard]); 
     currentCard++;
     if(currentCard >= christmasCards.length) {
         currentCard = 0;
-    }
+    }   
+   },1000 * seconds);
 
-   },2000 * seconds);
-
-   date = new Date();
-   time = date.toString().slice(0,21);
+   //every second update time
+   const timeInterval = setInterval(function () {
+   updateTime();
    document.getElementById("date").innerHTML = time;
+   },1000);
 
  </script>
 </html>
