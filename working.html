@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html> 
+    <!--
+            html site template taken from:
+    https://www.khanacademy.org/computing/computer-programming/programming-games-visualizations/advanced-development-tools/a/using-processingjs-outside-khan-academy
+    -->
+    <head>
+    <title>
+        Happy Holidays!
+    </title> 
+</head>
+
+    <body>
+    <h1 style="text-align: center; font-size: 48px;color:black;margin-top: 150px;">
+        Happy Holidays!
+    </h1>
+    <p align="center"> 
+	<!--This draws the Canvas on the webpage -->
+      <canvas id="mycanvas" style="width:400px;"></canvas> 
+    </p>
+ </body>
+ 
+ <!-- Run all the JavaScript stuff -->
+ <!-- Include the processing.js library -->
+ <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <!-- <script src="chauncey.js"></script> -->
+
+ <script src="testOne.js"></script>
+ <script src="testTwo.js"></script>
+
+ <script>
+    // Get the canvas that Processing-js will use
+   var canvas = document.getElementById("mycanvas"); 
+
+   //every 5 seconds
+   let one = false;
+   const interval = setInterval(function () {
+    console.log("hello");
+    if(one) {
+        var processingInstance = new Processing(canvas, testOne);       
+    } else {
+        var processingInstance = new Processing(canvas, testTwo); 
+    }
+    one = !one;
+
+   },2000);
+
+//    clearInterval(interval);
+   
+   // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+//    var processingInstance = new Processing(canvas, testOne); 
+//    var processingInstance = new Processing(canvas, testTwo); 
+ </script>
+</html>
